@@ -4,7 +4,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;
 
-    public GameObject[] SpawnCubes(Cube parent)
+    public Cube[] SpawnCubes(Cube parent)
     {
         float segmentationThreshold = parent.SegmentationThreshold / 2;
         float scaleRatio = 0.5f;
@@ -13,15 +13,15 @@ public class Spawner : MonoBehaviour
         Vector3 localScale = parent.transform.localScale * scaleRatio;
 
         int count = Random.Range(2, 7);
-        GameObject[] newCubes = new GameObject[count];
+        Cube[] newCubes = new Cube[count];
 
         for (int i = 0; i < count; i++)
         {
             Vector3 offset = Random.insideUnitSphere * position.magnitude * 0.1f;
-            GameObject cube = Instantiate(_prefab, position + offset, Quaternion.identity);
+            Cube cube = Instantiate(_prefab, position + offset, Quaternion.identity).GetComponent<Cube>();
 
             cube.transform.localScale = localScale;
-            cube.GetComponent<Cube>().SetSegmentationThreshold(segmentationThreshold);
+            cube.SetSegmentationThreshold(segmentationThreshold);
 
             newCubes[i] = cube;
         }

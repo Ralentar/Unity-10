@@ -33,10 +33,10 @@ public class EventHandler : MonoBehaviour
 
         if (segmentation—hance <= cube.SegmentationThreshold)
         {
-            GameObject[] newCubes = _spawner.SpawnCubes(cube);
+            Cube[] newCubes = _spawner.SpawnCubes(cube);
 
-            foreach (GameObject newCube in newCubes)
-                newCube.gameObject.GetComponent<Cube>().Click += ProcessEvent;
+            foreach (Cube newCube in newCubes)
+                newCube.Click += ProcessEvent;
 
             _exploder.Explode(newCubes, cube);
         }
